@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Footer = styled.div`
-  background: #ffab62;
+  background: #248ab9d2;
   width: 100%;
   height: 100px;
   position: absolute;

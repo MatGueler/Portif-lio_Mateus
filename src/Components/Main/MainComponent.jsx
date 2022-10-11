@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const Main = styled.div`
   width: 100%;
-
-  background-color: green;
-
-  padding-top: 100px;
+  /* padding: 100px 10px 100px 10px; */
+  box-sizing: border-box;
 `;

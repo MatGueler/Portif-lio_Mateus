@@ -7,5 +7,5 @@ export const Container = styled.div`
 
   position: relative;
 
-  background-color: red;
+  background-color: #9adfff89;
 `;
