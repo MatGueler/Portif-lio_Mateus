@@ -25,18 +25,4 @@ function InitialScreen() {
   );
 }
 
-const Main = styled.div`
-  width: 100%;
-
-  background-color: green;
-
-  padding-top: 100px;
-
-  h1 {
-    height: 200px;
-
-    background-color: blue;
-  }
-`;
-
 export default InitialScreen;
