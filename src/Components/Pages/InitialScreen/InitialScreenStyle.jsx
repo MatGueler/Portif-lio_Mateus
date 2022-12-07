@@ -1,42 +1,373 @@
 import styled from "styled-components";
 
+export const ImageProfile = styled.div`
+  width: 30%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 200px;
+    height: 200px;
+
+    border: 5px solid lightblue;
+    border-radius: 100%;
+
+    margin-bottom: 20px;
+  }
+`;
+
+export const ProfileIcons = styled.div`
+  display: flex;
+
+  * {
+    color: #ffffff;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    font-style: italic;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 10px;
+  }
+
+  svg {
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  svg:hover {
+    font-size: 35px;
+  }
+`;
+
+export const TextProfile = styled.div`
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin-bottom: 30px;
+  }
+`;
+
+export const Summary = styled.div`
+  --grey-text: #8f8f8f;
+  --blue-text: #002453;
+
+  width: 100%;
+  height: 50%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  button {
+    width: 200px;
+    height: 80px;
+
+    margin: 0 15px;
+
+    font-size: 20px;
+    color: var(--grey-text);
+
+    border: 5px solid transparent;
+    border-top-color: var(--grey-text);
+    /* border-bottom-color: var(--grey-text); */
+    background-color: transparent;
+  }
+
+  button:hover {
+    border-top-color: var(--blue-text);
+    /* border-bottom-color: var(--blue-text); */
+
+    font-size: 30px;
+    font-weight: bold;
+
+    color: var(--blue-text);
+
+    cursor: pointer;
+  }
+`;
+
+export const Painel = styled.div`
+  max-width: 100%;
+  height: 50%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 20px;
+
+  border-radius: 10px;
+
+  box-shadow: 0px 5px 10px #646464;
+  box-sizing: border-box;
+
+  background-color: #002453;
+
+  h1 {
+    width: 100%;
+
+    font-size: 30px;
+    font-family: "Share Tech Mono", monospace;
+
+    font-weight: bold;
+
+    text-align: center;
+    text-shadow: 5px 5px 5px #3b3b3b;
+
+    color: #ffffff;
+  }
+`;
+
+export const TextContact = styled.div`
+  width: 100%;
+  height: 40%;
+
+  display: flex;
+  align-items: center;
+
+  h3 {
+    width: 100%;
+
+    font-size: 30px;
+    font-family: "Share Tech Mono", monospace;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    color: #ffffff;
+  }
+`;
+
+export const ContactBox = styled.div`
+  width: 100%;
+  height: 60%;
+
+  background-color: #002453;
+
+  * {
+    outline: none;
+  }
+
+  form {
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    display: flex;
+
+    box-sizing: border-box;
+  }
+
+  .sender-box {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 10px;
+  }
+
+  input {
+    width: 100%;
+    height: 50px;
+
+    border-radius: 5px;
+
+    padding: 0 10px;
+    margin-bottom: 20px;
+
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 50%;
+    height: 40px;
+  }
+
+  textarea {
+    width: 50%;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+  }
+`;
+
+export const Background = styled.div`
+  width: 100%;
+  height: 100%;
+
+  padding: 20px;
+
+  color: ${(props) => (props.theme !== "dark" ? "#002453" : "#ffffff")};
+
+  box-sizing: border-box;
+
+  background-color: ${(props) =>
+    props.theme === "dark" ? "#002453" : "#ffffff"};
+`;
+
 export const Title = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 20%;
+
+  h1 {
+    width: 100%;
+
+    text-align: center;
+
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+  }
+`;
+
+export const Skills = styled.div`
+  width: 100%;
+  height: 80%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  color: #248ab9d2;
 
-  h1 {
-    font-size: 40px;
-    text-align: center;
-    -webkit-text-stroke: 1px;
-    -webkit-text-stroke-color: #163369;
-    margin-bottom: 20px;
+  .skill-box {
+    width: 400px;
+    height: 400px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 10px;
+
+    position: relative;
+
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    overflow: scroll;
+
+    background-color: #2e2e2e;
+  }
+`;
+
+export const Skill = styled.div`
+  width: 500px;
+  height: 100%;
+
+  img {
+    width: 400px;
+    height: 60%;
+
+    padding: 20px;
+
+    box-sizing: border-box;
   }
 
   h2 {
-    font-size: 60px;
+    width: 100%;
+
     text-align: center;
+    font-size: 25px;
+  }
+`;
+
+export const Slider = styled.ul`
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Arrow = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 2;
+
+  position: relative;
+
+  svg {
+    font-size: 40px;
   }
 
-  img {
-    width: 300px;
-    height: 300px;
-    border-radius: 100%;
-    box-sizing: border-box;
-    margin: 20px 0;
-    border: 1px solid #11447e;
-    box-shadow: 0 0 8px #248aff;
+  .previous {
+    position: absolute;
+    right: -15px;
   }
 
-  button {
-    width: 100px;
-    height: 40px;
-    border: 0;
-    border-radius: 10px;
+  .next {
+    position: absolute;
+    left: -15px;
+  }
+`;
+
+export const Carousel = styled.ul`
+  width: 400px;
+
+  display: flex;
+  justify-content: center;
+
+  margin: 20px 0;
+
+  p {
+    width: 10px;
+    height: 10px;
+
+    display: flex;
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    background-color: #777777;
+    margin: auto;
+  }
+
+  .current {
+    background-color: #86c5ff;
+    box-shadow: 0 0px 5px lightgray;
   }
 `;

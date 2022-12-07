@@ -2,15 +2,15 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
-html, body, #root {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-    position: relative;
-    /* overflow-y: hidden; */
-	background-color: #d9d9d9;
+body {
+	min-height: 100vh;
+	background-color: #86c5ff;
 }
+
+html, #root {
+	scroll-behavior: smooth;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,11 +24,11 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	font-family: 'Varela Round', sans-serif;
-    margin: 0;
+	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
+	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
