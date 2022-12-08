@@ -7,6 +7,14 @@ export const Container = styled.div`
   padding: 20px;
 
   position: relative;
+  background-color: ${(props) => {
+    if (props.theme === "dark") {
+      return "#002453";
+    }
+    if (props.theme === "clean") {
+      return "transparent";
+    }
+  }};
 
   box-sizing: border-box;
 `;

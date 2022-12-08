@@ -80,6 +80,7 @@ export const TextProfile = styled.div`
 export const Summary = styled.div`
   --grey-text: #8f8f8f;
   --blue-text: #002453;
+  --ligthblue-text: #00245311;
 
   width: 100%;
   height: 50%;
@@ -88,7 +89,7 @@ export const Summary = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
-  padding: 20px;
+  padding: 20px 0 0 0;
 
   box-sizing: border-box;
 
@@ -109,7 +110,7 @@ export const Summary = styled.div`
 
   button:hover {
     border-top-color: var(--blue-text);
-    /* border-bottom-color: var(--blue-text); */
+    background-color: var(--ligthblue-text);
 
     font-size: 30px;
     font-weight: bold;
@@ -122,10 +123,13 @@ export const Summary = styled.div`
 
 export const Painel = styled.div`
   max-width: 100%;
-  height: 50%;
+  height: ${(props) => props.height};
 
   display: flex;
   align-items: center;
+
+  position: relative;
+  overflow: hidden;
 
   padding: 20px;
 
@@ -134,7 +138,14 @@ export const Painel = styled.div`
   box-shadow: 0px 5px 10px #646464;
   box-sizing: border-box;
 
-  background-color: #002453;
+  background-color: ${(props) => {
+    if (props.theme === "dark") {
+      return "#002453";
+    }
+    if (props.theme === "clean") {
+      return "#86c5ff";
+    }
+  }};
 
   h1 {
     width: 100%;
@@ -249,6 +260,9 @@ export const Title = styled.div`
   width: 100%;
   height: 20%;
 
+  display: flex;
+  align-items: center;
+
   h1 {
     width: 100%;
 
@@ -318,10 +332,44 @@ export const Slider = styled.ul`
   align-items: center;
 `;
 
+export const ArrowPage = styled.div`
+  width: 40px;
+  height: 40px;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 2;
+
+  position: fixed;
+
+  .up,
+  .down {
+    color: #686868;
+  }
+
+  .up {
+    position: fixed;
+    top: 40%;
+    right: 20px;
+  }
+
+  .down {
+    position: fixed;
+    bottom: 40%;
+    right: 20px;
+  }
+
+  svg {
+    font-size: 40px;
+  }
+`;
+
 export const Arrow = styled.div`
   width: 40px;
   height: 40px;
-  display: flex;
+  display: ${(props) => props.display};
   justify-content: center;
 
   cursor: pointer;
@@ -329,6 +377,23 @@ export const Arrow = styled.div`
   z-index: 2;
 
   position: relative;
+
+  .up,
+  .down {
+    color: #686868;
+  }
+
+  .up {
+    position: fixed;
+    top: 40%;
+    right: 20px;
+  }
+
+  .down {
+    position: fixed;
+    bottom: 40%;
+    right: 20px;
+  }
 
   svg {
     font-size: 40px;
@@ -369,5 +434,30 @@ export const Carousel = styled.ul`
   .current {
     background-color: #86c5ff;
     box-shadow: 0 0px 5px lightgray;
+  }
+`;
+
+export const HeaderAbout = styled.div`
+  --grey-text: #8f8f8f;
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey-text);
+
+    cursor: pointer;
+  }
+
+  .selected {
+    background-color: #86c5ff;
   }
 `;

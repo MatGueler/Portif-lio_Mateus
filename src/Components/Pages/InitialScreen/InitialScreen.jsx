@@ -10,9 +10,11 @@ import {
 
 import {
   Arrow,
+  ArrowPage,
   Background,
   Carousel,
   ContactBox,
+  HeaderAbout,
   ImageProfile,
   Painel,
   ProfileIcons,
@@ -31,6 +33,8 @@ import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
+  BsFillArrowUpCircleFill,
+  BsFillArrowDownCircleFill,
 } from "react-icons/bs";
 
 import react from "../../../Assets/Image/react.svg";
@@ -42,14 +46,37 @@ import HeaderComponent from "../../Header/HeaderComponent";
 
 function InitialScreen() {
   const [current, setCurrent] = useState(1);
+  const [currentPage, setCurrentPage] = useState("1");
   const [headerVisible, setHeaderVisible] = useState(false);
+  const [aboutInfosSelected, setAboutInfosSelected] = useState("Perfil");
   const arr = [1, 2, 3, 4];
 
   function Scrolar() {
-    if (window.scrollY > 600) {
+    const heightPage = 620;
+
+    if (window.scrollY > 400) {
       setHeaderVisible(true);
     } else {
       setHeaderVisible(false);
+    }
+    const pageNumber = Math.ceil(window.scrollY / heightPage);
+
+    if (pageNumber === 0) {
+      setCurrentPage(`1`);
+    } else {
+      setCurrentPage(String(pageNumber));
+    }
+  }
+
+  function RenderAboutInfos({ item }) {
+    if (aboutInfosSelected === item) {
+      return (
+        <h1 className="selected" onClick={() => setAboutInfosSelected(item)}>
+          {item}
+        </h1>
+      );
+    } else {
+      return <h1 onClick={() => setAboutInfosSelected(item)}>{item}</h1>;
     }
   }
 
@@ -58,8 +85,8 @@ function InitialScreen() {
   return (
     <>
       {headerVisible ? <HeaderComponent /> : ""}
-      <Container>
-        <Painel>
+      <Container id="1" theme="clean">
+        <Painel height="50%" theme="dark">
           <ImageProfile>
             <img
               src="https://media-exp1.licdn.com/dms/image/C5603AQES3HRO7mPlpQ/profile-displayphoto-shrink_800_800/0/1668010094226?e=1675900800&v=beta&t=6s7tsa5LsppXosQTWMiH7pbsadFsHo04diSkdpm-K78"
@@ -103,19 +130,42 @@ function InitialScreen() {
           </TextProfile>
         </Painel>
         <Summary>
-          <button>Sobre mim</button>
+          <a href="#2">
+            <button>Sobre mim</button>
+          </a>
 
-          <button>Habilidades</button>
+          <a href="#3">
+            <button>Formação</button>
+          </a>
 
-          <button>Formação</button>
+          <a href="#4">
+            <button>Habilidades</button>
+          </a>
 
           <button>Portifólio</button>
 
-          <button>Contato</button>
+          <a href="#5">
+            <button>Contato</button>
+          </a>
         </Summary>
       </Container>
 
-      <ContactContainer id="Skills" onMouseOver={Scrolar}>
+      <Container id="2" theme="dark">
+        <Title>
+          <h1>Sobre mim</h1>
+        </Title>
+        <Painel height="70%" theme="clean">
+          <HeaderAbout>
+            {["Perfil", "Curiosidades", "Fotos"].map((item, index) => (
+              <RenderAboutInfos key={index} item={item} />
+            ))}
+          </HeaderAbout>
+        </Painel>
+      </Container>
+
+      <Container id="3" theme="clean" onMouseOver={Scrolar}></Container>
+
+      <ContactContainer id="4">
         <Background theme="dark">
           <Title>
             <h1>Habilidades</h1>
@@ -222,9 +272,9 @@ function InitialScreen() {
             <Carousel>
               {arr.map((item, index) => {
                 if (item === current) {
-                  return <p className="current"></p>;
+                  return <p key={index} className="current"></p>;
                 } else {
-                  return <p></p>;
+                  return <p key={index}></p>;
                 }
               })}
             </Carousel>
@@ -232,64 +282,7 @@ function InitialScreen() {
         </Background>
       </ContactContainer>
 
-      <Container>
-        <Painel>
-          <ImageProfile>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C5603AQES3HRO7mPlpQ/profile-displayphoto-shrink_800_800/0/1668010094226?e=1675900800&v=beta&t=6s7tsa5LsppXosQTWMiH7pbsadFsHo04diSkdpm-K78"
-              alt="ImageProfle"
-            />
-            <ProfileIcons>
-              <a
-                href="https://www.linkedin.com/in/mateusgueler/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BsLinkedin />
-              </a>
-              <a
-                href="https://github.com/MatGueler"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BsGithub />
-              </a>
-              <a
-                href="https://github.com/MatGueler"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <HiOutlineMail />
-              </a>
-            </ProfileIcons>
-          </ImageProfile>
-          <TextProfile>
-            <h1>Mateus Gueler Machado</h1>
-            <h1>
-              {"<"} Desenvolvedor Web Full Stack {"/>"}
-            </h1>
-          </TextProfile>
-        </Painel>
-        <Summary>
-          <button>Stacks</button>
-
-          <button>Formação</button>
-
-          <button>Portifólio</button>
-
-          <button>Contato</button>
-
-          <button>Stacks</button>
-
-          <button>Formação</button>
-
-          <button>Portifólio</button>
-
-          <button>Contato</button>
-        </Summary>
-      </Container>
-
-      <ContactContainer>
+      <ContactContainer id="5">
         <TextContact>
           <h3>Ficou alguma dúvida? Mande uma mensagem!</h3>
         </TextContact>
@@ -305,6 +298,26 @@ function InitialScreen() {
           </form>
         </ContactBox>
       </ContactContainer>
+
+      {currentPage !== "1" ? (
+        <ArrowPage>
+          <a href={`#${Number(currentPage) - 1}`}>
+            <BsFillArrowUpCircleFill className="up" />
+          </a>
+        </ArrowPage>
+      ) : (
+        ""
+      )}
+
+      {currentPage !== "5" ? (
+        <ArrowPage onClick={() => console.log(currentPage)}>
+          <a href={`#${Number(currentPage) + 1}`}>
+            <BsFillArrowDownCircleFill className="down" />
+          </a>
+        </ArrowPage>
+      ) : (
+        ""
+      )}
     </>
   );
 }
