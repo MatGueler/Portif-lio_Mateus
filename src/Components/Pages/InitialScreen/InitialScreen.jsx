@@ -16,8 +16,11 @@ import {
   ContactBox,
   HeaderAbout,
   ImageProfile,
+  OpenProject,
   Painel,
+  Portifolio,
   ProfileIcons,
+  Project,
   Skill,
   Skills,
   Slider,
@@ -29,6 +32,7 @@ import {
 
 //  # Icons
 import { BsLinkedin, BsGithub } from "react-icons/bs";
+import { AiOutlineZoomIn } from "react-icons/ai";
 import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
 import {
   BsFillArrowLeftCircleFill,
@@ -39,17 +43,24 @@ import {
 
 import react from "../../../Assets/Image/react.svg";
 import javascript from "../../../Assets/Image/js.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import HeaderComponent from "../../Header/HeaderComponent";
+
+//  # Data
+import { projects } from "../../../Services/Data";
 
 //  # Libs
 
 function InitialScreen() {
   const [current, setCurrent] = useState(1);
+  const [openProject, setOpenProject] = useState(false);
   const [currentPage, setCurrentPage] = useState("1");
   const [headerVisible, setHeaderVisible] = useState(false);
   const [aboutInfosSelected, setAboutInfosSelected] = useState("Perfil");
+
   const arr = [1, 2, 3, 4];
+
+  const carousel = useRef(null);
 
   function Scrolar() {
     const heightPage = 620;
@@ -80,6 +91,23 @@ function InitialScreen() {
     }
   }
 
+  function PutProjects({ data }) {
+    const [isOverProject, setIsOverProject] = useState(false);
+    return (
+      <Project
+        onClick={() => setOpenProject(true)}
+        onMouseOver={() => setIsOverProject(true)}
+        onMouseLeave={() => setIsOverProject(false)}
+        image={data.image}
+      >
+        <h1>{data.title}</h1>
+        <div className="project-box">
+          {isOverProject ? <AiOutlineZoomIn /> : null}
+        </div>
+      </Project>
+    );
+  }
+
   document.addEventListener("scroll", Scrolar);
 
   return (
@@ -91,6 +119,7 @@ function InitialScreen() {
             <img
               src="https://media-exp1.licdn.com/dms/image/C5603AQES3HRO7mPlpQ/profile-displayphoto-shrink_800_800/0/1668010094226?e=1675900800&v=beta&t=6s7tsa5LsppXosQTWMiH7pbsadFsHo04diSkdpm-K78"
               alt="ImageProfle"
+              draggable={false}
             />
             <ProfileIcons>
               <a
@@ -163,7 +192,38 @@ function InitialScreen() {
         </Painel>
       </Container>
 
-      <Container id="3" theme="clean" onMouseOver={Scrolar}></Container>
+      <Container
+        id="3"
+        theme="clean"
+        onClick={() => {
+          if (openProject) setOpenProject(false);
+        }}
+      >
+        <Title>
+          <h1>Meus projetos</h1>
+        </Title>
+
+        <Portifolio>
+          {openProject ? (
+            <OpenProject image="https://gestaocont.com.br/site/uploads/2020/06/ecommerce-seo-tips.jpg">
+              <div className="project-box">
+                <div className="description">
+                  <h1>Título</h1>
+                  <p>descrição</p>
+                  <div className="action-buttons">
+                    <button>Github</button>
+                    <button>Site</button>
+                  </div>
+                </div>
+              </div>
+            </OpenProject>
+          ) : null}
+
+          {projects.map((item, index) => (
+            <PutProjects key={index} data={item} />
+          ))}
+        </Portifolio>
+      </Container>
 
       <ContactContainer id="4">
         <Background theme="dark">
@@ -174,10 +234,8 @@ function InitialScreen() {
           <Skills>
             <Slider>
               <Arrow
-                onClick={() => {
-                  const slider =
-                    document.getElementsByClassName("skill-box")[0];
-                  slider.scrollLeft -= 400;
+                onClick={(e) => {
+                  carousel.current.scrollLeft -= carousel.current.offsetWidth;
                   if (current !== 1) {
                     setCurrent((prev) => {
                       return prev - 1;
@@ -188,7 +246,7 @@ function InitialScreen() {
                 <BsFillArrowLeftCircleFill className="previous" />
               </Arrow>
 
-              <div className="skill-box">
+              <div className="skill-box" ref={carousel}>
                 <Skill>
                   <img src={javascript} alt="js" />
                   <h2>HTML</h2>
@@ -252,16 +310,14 @@ function InitialScreen() {
 
               <Arrow
                 onClick={() => {
-                  const slider =
-                    document.getElementsByClassName("skill-box")[0];
-                  slider.scrollLeft += 400;
+                  carousel.current.scrollLeft += carousel.current.offsetWidth;
                   if (current < arr.length) {
                     setCurrent((prev) => {
                       return prev + 1;
                     });
                   } else {
                     setCurrent(1);
-                    slider.scrollLeft = 0;
+                    carousel.current.scrollLeft = 0;
                   }
                 }}
               >
