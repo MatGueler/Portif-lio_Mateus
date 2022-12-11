@@ -4,36 +4,23 @@ import {
   ContactContainer,
   Container,
 } from "../../Container/ContainerComponent";
-// import { Main } from "../../Main/MainComponent";
-// import { Header } from "../../Header/HeaderComponent";
-// import { Footer } from "../../Footer/FooterComponent";
 
 import {
   Arrow,
   ArrowPage,
   Background,
   Carousel,
-  ContactBox,
-  HeaderAbout,
-  ImageProfile,
   OpenProject,
-  Painel,
   Portifolio,
-  ProfileIcons,
   Project,
   Skill,
   Skills,
   Slider,
-  Summary,
-  TextContact,
-  TextProfile,
   Title,
 } from "./InitialScreenStyle";
 
 //  # Icons
-import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { AiOutlineZoomIn } from "react-icons/ai";
-import { HiOutlineMail, HiLocationMarker } from "react-icons/hi";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -48,6 +35,9 @@ import HeaderComponent from "../../Header/HeaderComponent";
 
 //  # Data
 import { projects } from "../../../Services/Data";
+import ContactPage from "../../Dashboards/ContactPage/ContactPage";
+import ApresentationPage from "../../Dashboards/ApresentationPage/ApresentationPage";
+import AboutMeComponent from "../../Dashboards/AboutMeComponent/AboutMeComponent";
 
 //  # Libs
 
@@ -56,7 +46,6 @@ function InitialScreen() {
   const [openProject, setOpenProject] = useState(false);
   const [currentPage, setCurrentPage] = useState("1");
   const [headerVisible, setHeaderVisible] = useState(false);
-  const [aboutInfosSelected, setAboutInfosSelected] = useState("Perfil");
 
   const arr = [1, 2, 3, 4];
 
@@ -76,18 +65,6 @@ function InitialScreen() {
       setCurrentPage(`1`);
     } else {
       setCurrentPage(String(pageNumber));
-    }
-  }
-
-  function RenderAboutInfos({ item }) {
-    if (aboutInfosSelected === item) {
-      return (
-        <h1 className="selected" onClick={() => setAboutInfosSelected(item)}>
-          {item}
-        </h1>
-      );
-    } else {
-      return <h1 onClick={() => setAboutInfosSelected(item)}>{item}</h1>;
     }
   }
 
@@ -113,84 +90,9 @@ function InitialScreen() {
   return (
     <>
       {headerVisible ? <HeaderComponent /> : ""}
-      <Container id="1" theme="clean">
-        <Painel height="50%" theme="dark">
-          <ImageProfile>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C5603AQES3HRO7mPlpQ/profile-displayphoto-shrink_800_800/0/1668010094226?e=1675900800&v=beta&t=6s7tsa5LsppXosQTWMiH7pbsadFsHo04diSkdpm-K78"
-              alt="ImageProfle"
-              draggable={false}
-            />
-            <ProfileIcons>
-              <a
-                href="https://www.linkedin.com/in/mateusgueler/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BsLinkedin />
-              </a>
-              <a
-                href="https://github.com/MatGueler"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BsGithub />
-              </a>
-              <a
-                href="#Skills"
-                // target="_blank"
-                // rel="noopener noreferrer"
-              >
-                <HiOutlineMail />
-              </a>
-            </ProfileIcons>
-          </ImageProfile>
-          <TextProfile>
-            <h1>Mateus Gueler Machado</h1>
-            <h1>
-              {"<"} Desenvolvedor Web Full Stack {"/>"}
-            </h1>
-            <ProfileIcons>
-              <div className="icon">
-                <HiLocationMarker />
-              </div>
-              <p>Cariacica, ES, Brasil</p>
-            </ProfileIcons>
-          </TextProfile>
-        </Painel>
-        <Summary>
-          <a href="#2">
-            <button>Sobre mim</button>
-          </a>
+      <ApresentationPage />
 
-          <a href="#3">
-            <button>Formação</button>
-          </a>
-
-          <a href="#4">
-            <button>Habilidades</button>
-          </a>
-
-          <button>Portifólio</button>
-
-          <a href="#5">
-            <button>Contato</button>
-          </a>
-        </Summary>
-      </Container>
-
-      <Container id="2" theme="dark">
-        <Title>
-          <h1>Sobre mim</h1>
-        </Title>
-        <Painel height="70%" theme="clean">
-          <HeaderAbout>
-            {["Perfil", "Curiosidades", "Fotos"].map((item, index) => (
-              <RenderAboutInfos key={index} item={item} />
-            ))}
-          </HeaderAbout>
-        </Painel>
-      </Container>
+      <AboutMeComponent />
 
       <Container
         id="3"
@@ -225,6 +127,7 @@ function InitialScreen() {
         </Portifolio>
       </Container>
 
+      {/* Próximo a componentizar */}
       <ContactContainer id="4">
         <Background theme="dark">
           <Title>
@@ -338,22 +241,7 @@ function InitialScreen() {
         </Background>
       </ContactContainer>
 
-      <ContactContainer id="5">
-        <TextContact>
-          <h3>Ficou alguma dúvida? Mande uma mensagem!</h3>
-        </TextContact>
-        <ContactBox>
-          <form action="">
-            <div className="sender-box">
-              <input type="text" placeholder="Nome" />
-              <input type="text" placeholder="email" />
-              <input type="text" placeholder="Assunto" />
-              <button>Enviar</button>
-            </div>
-            <textarea></textarea>
-          </form>
-        </ContactBox>
-      </ContactContainer>
+      <ContactPage />
 
       {currentPage !== "1" ? (
         <ArrowPage>
