@@ -106,6 +106,11 @@ export const Skill = styled.div`
   width: 500px;
   height: 100%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   img {
     width: 400px;
     height: 60%;
@@ -117,9 +122,14 @@ export const Skill = styled.div`
 
   h2 {
     width: 100%;
+    height: 20%;
 
-    text-align: center;
-    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+    font-weight: bold;
   }
 `;
 

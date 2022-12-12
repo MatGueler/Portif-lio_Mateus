@@ -28,13 +28,11 @@ import {
   BsFillArrowDownCircleFill,
 } from "react-icons/bs";
 
-import react from "../../../Assets/Image/react.svg";
-import javascript from "../../../Assets/Image/js.svg";
 import { useRef, useState } from "react";
 import HeaderComponent from "../../Header/HeaderComponent";
 
 //  # Data
-import { projects } from "../../../Services/Data";
+import { projects, skills } from "../../../Services/Data";
 import ContactPage from "../../Dashboards/ContactPage/ContactPage";
 import ApresentationPage from "../../Dashboards/ApresentationPage/ApresentationPage";
 import AboutMeComponent from "../../Dashboards/AboutMeComponent/AboutMeComponent";
@@ -46,8 +44,6 @@ function InitialScreen() {
   const [openProject, setOpenProject] = useState(false);
   const [currentPage, setCurrentPage] = useState("1");
   const [headerVisible, setHeaderVisible] = useState(false);
-
-  const arr = [1, 2, 3, 4];
 
   const carousel = useRef(null);
 
@@ -127,6 +123,8 @@ function InitialScreen() {
         </Portifolio>
       </Container>
 
+      <Container></Container>
+
       {/* Próximo a componentizar */}
       <ContactContainer id="4">
         <Background theme="dark">
@@ -150,71 +148,20 @@ function InitialScreen() {
               </Arrow>
 
               <div className="skill-box" ref={carousel}>
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>HTML</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>CSS</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>JavaScript</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>TypeScript</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>Python</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>SQL</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>Node.js</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={react} alt="react" />
-                  <h2>React</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>Angular</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>Postgres</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>MongoDB</h2>
-                </Skill>
-
-                <Skill>
-                  <img src={javascript} alt="js" />
-                  <h2>Prisma</h2>
-                </Skill>
+                {skills.map((item, index) => {
+                  return (
+                    <Skill key={index}>
+                      <img src={item.image} alt="js" />
+                      <h2>{item.name}</h2>
+                    </Skill>
+                  );
+                })}
               </div>
 
               <Arrow
                 onClick={() => {
                   carousel.current.scrollLeft += carousel.current.offsetWidth;
-                  if (current < arr.length) {
+                  if (current < skills.length) {
                     setCurrent((prev) => {
                       return prev + 1;
                     });
@@ -229,8 +176,8 @@ function InitialScreen() {
             </Slider>
 
             <Carousel>
-              {arr.map((item, index) => {
-                if (item === current) {
+              {skills.map((item, index) => {
+                if (index + 1 === current) {
                   return <p key={index} className="current"></p>;
                 } else {
                   return <p key={index}></p>;
