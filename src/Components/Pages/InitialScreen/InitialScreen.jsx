@@ -1,14 +1,10 @@
 //  # Components
 
-import {
-  ContactContainer,
-  Container,
-} from "../../Container/ContainerComponent";
+import { Container } from "../../Container/ContainerComponent";
 
 import {
   Arrow,
   ArrowPage,
-  Background,
   Carousel,
   OpenProject,
   Portifolio,
@@ -36,6 +32,7 @@ import { projects, skills } from "../../../Services/Data";
 import ContactPage from "../../Dashboards/ContactPage/ContactPage";
 import ApresentationPage from "../../Dashboards/ApresentationPage/ApresentationPage";
 import AboutMeComponent from "../../Dashboards/AboutMeComponent/AboutMeComponent";
+import ExperienceComponent from "../../Dashboards/ExperiencePage/ExperienceComponent";
 
 //  # Libs
 
@@ -49,16 +46,18 @@ function InitialScreen() {
 
   function Scrolar() {
     const heightPage = 620;
+    const scroolPage = window.scrollY;
 
-    if (window.scrollY > 400) {
+    if (scroolPage > 400) {
       setHeaderVisible(true);
     } else {
       setHeaderVisible(false);
     }
-    const pageNumber = Math.ceil(window.scrollY / heightPage);
+    const pageNumber = Math.ceil(scroolPage / heightPage);
 
     if (pageNumber === 0) {
       setCurrentPage(`1`);
+      return;
     } else {
       setCurrentPage(String(pageNumber));
     }
@@ -123,70 +122,68 @@ function InitialScreen() {
         </Portifolio>
       </Container>
 
-      <Container></Container>
-
       {/* Próximo a componentizar */}
-      <ContactContainer id="4">
-        <Background theme="dark">
-          <Title>
-            <h1>Habilidades</h1>
-          </Title>
+      <Container id="4" theme="dark">
+        <Title>
+          <h1>Habilidades</h1>
+        </Title>
 
-          <Skills>
-            <Slider>
-              <Arrow
-                onClick={(e) => {
-                  carousel.current.scrollLeft -= carousel.current.offsetWidth;
-                  if (current !== 1) {
-                    setCurrent((prev) => {
-                      return prev - 1;
-                    });
-                  }
-                }}
-              >
-                <BsFillArrowLeftCircleFill className="previous" />
-              </Arrow>
-
-              <div className="skill-box" ref={carousel}>
-                {skills.map((item, index) => {
-                  return (
-                    <Skill key={index}>
-                      <img src={item.image} alt="js" />
-                      <h2>{item.name}</h2>
-                    </Skill>
-                  );
-                })}
-              </div>
-
-              <Arrow
-                onClick={() => {
-                  carousel.current.scrollLeft += carousel.current.offsetWidth;
-                  if (current < skills.length) {
-                    setCurrent((prev) => {
-                      return prev + 1;
-                    });
-                  } else {
-                    setCurrent(1);
-                    carousel.current.scrollLeft = 0;
-                  }
-                }}
-              >
-                <BsFillArrowRightCircleFill className="next" />
-              </Arrow>
-            </Slider>
-
-            <Carousel>
-              {skills.map((item, index) => {
-                if (index + 1 === current) {
-                  return <p key={index} className="current"></p>;
-                } else {
-                  return <p key={index}></p>;
+        <Skills>
+          <Slider>
+            <Arrow
+              onClick={(e) => {
+                carousel.current.scrollLeft -= carousel.current.offsetWidth;
+                if (current !== 1) {
+                  setCurrent((prev) => {
+                    return prev - 1;
+                  });
                 }
+              }}
+            >
+              <BsFillArrowLeftCircleFill className="previous" />
+            </Arrow>
+
+            <div className="skill-box" ref={carousel}>
+              {skills.map((item, index) => {
+                return (
+                  <Skill key={index}>
+                    <img src={item.image} alt="js" />
+                    <h2>{item.name}</h2>
+                  </Skill>
+                );
               })}
-            </Carousel>
-          </Skills>
-        </Background>
-      </ContactContainer>
+            </div>
+
+            <Arrow
+              onClick={() => {
+                carousel.current.scrollLeft += carousel.current.offsetWidth;
+                if (current < skills.length) {
+                  setCurrent((prev) => {
+                    return prev + 1;
+                  });
+                } else {
+                  setCurrent(1);
+                  carousel.current.scrollLeft = 0;
+                }
+              }}
+            >
+              <BsFillArrowRightCircleFill className="next" />
+            </Arrow>
+          </Slider>
+
+          <Carousel>
+            {skills.map((item, index) => {
+              if (index + 1 === current) {
+                return <p key={index} className="current"></p>;
+              } else {
+                return <p key={index}></p>;
+              }
+            })}
+          </Carousel>
+        </Skills>
+      </Container>
+
+      <ExperienceComponent />
 
       <ContactPage />
 
@@ -200,8 +197,8 @@ function InitialScreen() {
         ""
       )}
 
-      {currentPage !== "5" ? (
-        <ArrowPage onClick={() => console.log(currentPage)}>
+      {currentPage !== "6" ? (
+        <ArrowPage>
           <a href={`#${Number(currentPage) + 1}`}>
             <BsFillArrowDownCircleFill className="down" />
           </a>

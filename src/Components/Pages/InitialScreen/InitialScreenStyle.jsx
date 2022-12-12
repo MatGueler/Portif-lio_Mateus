@@ -41,20 +41,6 @@ export const Painel = styled.div`
   }
 `;
 
-export const Background = styled.div`
-  width: 100%;
-  height: 100%;
-
-  padding: 20px;
-
-  color: ${(props) => (props.theme !== "dark" ? "#002453" : "#ffffff")};
-
-  box-sizing: border-box;
-
-  background-color: ${(props) =>
-    props.theme === "dark" ? "#002453" : "#ffffff"};
-`;
-
 export const Title = styled.div`
   width: 100%;
   height: 20%;
@@ -155,6 +141,7 @@ export const Arrow = styled.div`
 
   svg {
     font-size: 40px;
+    color: #ffffff;
   }
 
   .previous {

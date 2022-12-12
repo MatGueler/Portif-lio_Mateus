@@ -3,7 +3,7 @@ import { ContactBox, TextContact } from "./ContactStyle";
 
 export default function ContactPage() {
   return (
-    <ContactContainer id="5">
+    <ContactContainer id="6" theme="dark">
       <TextContact>
         <h3>Ficou alguma dúvida? Mande uma mensagem!</h3>
       </TextContact>

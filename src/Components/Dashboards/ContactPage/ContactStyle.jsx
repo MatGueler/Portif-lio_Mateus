@@ -25,7 +25,7 @@ export const ContactBox = styled.div`
   width: 100%;
   height: 60%;
 
-  background-color: #002453;
+  background-color: #86c5ff;
 
   * {
     outline: none;
@@ -57,6 +57,7 @@ export const ContactBox = styled.div`
     height: 50px;
 
     border-radius: 5px;
+    border: 0;
 
     padding: 0 10px;
     margin-bottom: 20px;
@@ -67,6 +68,11 @@ export const ContactBox = styled.div`
   button {
     width: 50%;
     height: 40px;
+
+    border-radius: 10px;
+    border: 0;
+
+    cursor: pointer;
   }
 
   textarea {
@@ -75,6 +81,7 @@ export const ContactBox = styled.div`
     padding: 10px;
 
     border-radius: 10px;
+    border: 0;
 
     box-sizing: border-box;
   }

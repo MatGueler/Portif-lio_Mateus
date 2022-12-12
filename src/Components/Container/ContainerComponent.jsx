@@ -26,4 +26,13 @@ export const ContactContainer = styled.div`
   position: relative;
 
   box-sizing: border-box;
+
+  background-color: ${(props) => {
+    if (props.theme === "dark") {
+      return "#002453";
+    }
+    if (props.theme === "clean") {
+      return "transparent";
+    }
+  }};
 `;
